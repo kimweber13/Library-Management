@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BookTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java in LibraryManagement Coverage Results</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">BookTest.java</span></div><h1>BookTest.java</h1><pre class="source lang-java linenums">import org.example.Book;
+import org.example.LibrarySystem;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+/**
+ * A class to test a books features.
+ *
+ * @author Team 50
+ * @version 1.0
+ */
+
+<span class="fc" id="L22">public class BookTest {</span>
+
+    private Book book;
+<span class="fc" id="L25">    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();</span>
+<span class="fc" id="L26">    private final PrintStream originalOut = System.out;</span>
+
+    @BeforeEach
+    public void setUp() {
+<span class="fc" id="L30">        System.setOut(new PrintStream(outContent));</span>
+<span class="fc" id="L31">        book = new Book(&quot;1234567890&quot;, &quot;Odyssee, Homer&quot;);</span>
+<span class="fc" id="L32">        LibrarySystem.getBooks().add(book);</span>
+<span class="fc" id="L33">    }</span>
+
+    @AfterEach
+    public void tearDown() {
+<span class="fc" id="L37">        System.setOut(originalOut);</span>
+<span class="fc" id="L38">        LibrarySystem.getBooks().clear();</span>
+<span class="fc" id="L39">    }</span>
+
+    @Test
+    public void testDisplayBooks() {
+<span class="fc" id="L43">        List&lt;Book&gt; newBooks = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L44">        newBooks.add(new Book(&quot;1234567890&quot;, &quot;Odyssee, Homer&quot;));</span>
+<span class="fc" id="L45">        newBooks.add(new Book(&quot;0987654321&quot;, &quot;Der Fremde, Albert Camus&quot;));</span>
+<span class="fc" id="L46">        LibrarySystem.getBooks().clear();</span>
+<span class="fc" id="L47">        LibrarySystem.getBooks().addAll(newBooks);</span>
+
+<span class="fc" id="L49">        Book.displayBooks();</span>
+
+<span class="fc" id="L51">        String output = outContent.toString();</span>
+<span class="fc" id="L52">        assertTrue(output.contains(&quot;Bücherliste&quot;));</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (Book book : newBooks) {</span>
+<span class="fc" id="L54">            assertTrue(output.contains(book.getTitle()));</span>
+<span class="fc" id="L55">            assertTrue(output.contains(book.getIsbn()));</span>
+<span class="fc" id="L56">        }</span>
+<span class="fc" id="L57">    }</span>
+
+    @Test
+    public void testDeleteBook() {
+<span class="fc" id="L61">        String isbn = book.getIsbn();</span>
+<span class="fc" id="L62">        List&lt;Book&gt; booksBeforeDelete = new ArrayList&lt;&gt;(LibrarySystem.getBooks());</span>
+<span class="fc" id="L63">        assertTrue(booksBeforeDelete.contains(book));</span>
+
+<span class="fc" id="L65">        Book.deleteBook(isbn);</span>
+
+<span class="fc" id="L67">        assertFalse(LibrarySystem.getBooks().contains(book));</span>
+<span class="fc" id="L68">    }</span>
+
+    @Test
+    public void testDeleteBookNotFound() {
+<span class="fc" id="L72">        String isbn = &quot;0000000000&quot;; // invented isbn, not available</span>
+
+<span class="fc" id="L74">        Book.deleteBook(isbn);</span>
+
+<span class="fc" id="L76">        String output = outContent.toString();</span>
+<span class="fc" id="L77">        assertTrue(output.contains(&quot;Buch mit ISBN &quot; + isbn + &quot; nicht gefunden.&quot;));</span>
+<span class="fc" id="L78">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
