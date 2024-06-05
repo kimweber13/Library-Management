@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VisitorActions.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java in LibraryManagement Coverage Results</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">VisitorActions.java</span></div><h1>VisitorActions.java</h1><pre class="source lang-java linenums">package org.example;
+
+import java.util.Scanner;
+
+/**
+ * The first implementation of the visitor actions.
+ *
+ * @author Team 50
+ * @version 1.0
+ */
+
+<span class="nc" id="L12">public class VisitorActions {</span>
+<span class="nc" id="L13">    private static String userId = &quot;&quot;;</span>
+
+    public void performActions(Scanner scanner) {
+<span class="nc" id="L16">        System.out.println(&quot;Bitte geben Sie Ihre Benutzer-ID ein:&quot;);</span>
+<span class="nc" id="L17">        System.out.print(&quot;&gt; &quot;);</span>
+<span class="nc" id="L18">        userId = scanner.nextLine();</span>
+<span class="nc" id="L19">        System.out.println(&quot;+--------------------------------------+&quot;);</span>
+<span class="nc" id="L20">        System.out.println(&quot;|           Besucheraktionen           |&quot;);</span>
+<span class="nc" id="L21">        System.out.println(&quot;+--------------------------------------+&quot;);</span>
+<span class="nc" id="L22">        System.out.println(&quot;Benutzer: &quot; + userId);</span>
+
+<span class="nc" id="L24">        boolean proceedRequest = true;</span>
+
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        while (proceedRequest) {</span>
+<span class="nc" id="L27">            System.out.println(&quot;+-----------------------------------------------------+&quot;);</span>
+<span class="nc" id="L28">            System.out.println(&quot;|  1. Bücher anzeigen     |   2. Buch löschen         |&quot;);</span>
+<span class="nc" id="L29">            System.out.println(&quot;|-------------------------|---------------------------|&quot;);</span>
+<span class="nc" id="L30">            System.out.println(&quot;|  3. Buchkopien anzeigen |   4. Buchkopien löschen   |&quot;);</span>
+<span class="nc" id="L31">            System.out.println(&quot;|-------------------------|---------------------------|&quot;);</span>
+<span class="nc" id="L32">            System.out.println(&quot;|  5. Kunden anzeigen     |   6. Kunde löschen        |&quot;);</span>
+<span class="nc" id="L33">            System.out.println(&quot;|-------------------------|---------------------------|&quot;);</span>
+<span class="nc" id="L34">            System.out.println(&quot;|  7. nichts              |   8. Hauptmenü            |&quot;);</span>
+<span class="nc" id="L35">            System.out.println(&quot;+-----------------------------------------------------+&quot;);</span>
+<span class="nc" id="L36">            System.out.print(&quot;&gt; &quot;);</span>
+
+<span class="nc" id="L38">            int action = scanner.nextInt();</span>
+<span class="nc" id="L39">            scanner.nextLine();</span>
+
+<span class="nc bnc" id="L41" title="All 9 branches missed.">            switch (action) {</span>
+                case 1:
+<span class="nc" id="L43">                    Book.displayBooks();</span>
+<span class="nc" id="L44">                    break;</span>
+                case 2:
+<span class="nc" id="L46">                    deleteBook(scanner);</span>
+<span class="nc" id="L47">                    break;</span>
+                case 3:
+<span class="nc" id="L49">                    BookCopy.displayBookCopies();</span>
+<span class="nc" id="L50">                    break;</span>
+                case 4:
+<span class="nc" id="L52">                    deleteBookCopy(scanner);</span>
+<span class="nc" id="L53">                    break;</span>
+                case 5:
+<span class="nc" id="L55">                    UserService.displayCustomers();</span>
+<span class="nc" id="L56">                    break;</span>
+                case 6:
+<span class="nc" id="L58">                    deleteCustomer(scanner);</span>
+<span class="nc" id="L59">                    break;</span>
+                case 7:
+<span class="nc" id="L61">                    System.out.println(&quot;Yet to implement.&quot;);</span>
+<span class="nc" id="L62">                    break;</span>
+                case 8:
+<span class="nc" id="L64">                    System.out.println(&quot;Zurück zum Hauptmenü...&quot;);</span>
+<span class="nc" id="L65">                    LibrarySystem.main(new String[0]);</span>
+<span class="nc" id="L66">                    proceedRequest = false;</span>
+<span class="nc" id="L67">                    break;</span>
+                default:
+<span class="nc" id="L69">                    System.out.println(&quot;Bitte eine valide Auswahl tätigen...&quot;);</span>
+                    break;
+            }
+<span class="nc" id="L72">        }</span>
+<span class="nc" id="L73">    }</span>
+    private void deleteBookCopy(Scanner scanner) {
+<span class="nc" id="L75">        System.out.println(&quot;Bitte geben Sie die ID der zu löschenden Buchkopie ein:&quot;);</span>
+<span class="nc" id="L76">        System.out.print(&quot;&gt; &quot;);</span>
+<span class="nc" id="L77">        int copyId = scanner.nextInt();</span>
+<span class="nc" id="L78">        scanner.nextLine();</span>
+<span class="nc" id="L79">        BookCopy.deleteBookCopy(copyId);</span>
+<span class="nc" id="L80">    }</span>
+
+    private void deleteBook(Scanner scanner) {
+<span class="nc" id="L83">        System.out.println(&quot;Bitte geben Sie die ISBN des zu löschenden Buches ein:&quot;);</span>
+<span class="nc" id="L84">        System.out.print(&quot;&gt; &quot;);</span>
+<span class="nc" id="L85">        String isbn = scanner.nextLine();</span>
+<span class="nc" id="L86">        Book.deleteBook(isbn);</span>
+<span class="nc" id="L87">    }</span>
+
+    private void deleteCustomer(Scanner scanner) {
+<span class="nc" id="L90">        System.out.println(&quot;Bitte geben Sie die ID des zu löschenden Kunden ein:&quot;);</span>
+<span class="nc" id="L91">        System.out.print(&quot;&gt; &quot;);</span>
+<span class="nc" id="L92">        int customerId = scanner.nextInt();</span>
+<span class="nc" id="L93">        scanner.nextLine();</span>
+<span class="nc" id="L94">        UserService.deleteCustomer(customerId);</span>
+<span class="nc" id="L95">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

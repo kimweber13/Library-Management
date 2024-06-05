@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LibrarySystem.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java in LibraryManagement Coverage Results</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">LibrarySystem.java</span></div><h1>LibrarySystem.java</h1><pre class="source lang-java linenums">package org.example;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+/**
+ * The implementation of the library.
+ *
+ * @author Team 50
+ * @version 1.0
+ */
+
+<span class="nc" id="L16">public class LibrarySystem {</span>
+<span class="fc" id="L17">    public static List&lt;Book&gt; books = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L18">    private static List&lt;Customer&gt; customers = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L19">    private static Map&lt;Integer, BookCopy&gt; bookCopies = new HashMap&lt;&gt;();</span>
+
+    public static List&lt;Book&gt; getBooks() {
+<span class="fc" id="L22">        return books;</span>
+    }
+
+    public static Map&lt;Integer, BookCopy&gt; getBookCopies() {
+<span class="fc" id="L26">        return bookCopies;</span>
+    }
+
+    public static List&lt;Customer&gt; getCustomers() {
+<span class="fc" id="L30">        return customers;</span>
+    }
+
+    public static void main(String[] args) {
+<span class="nc" id="L34">        addExampleData();</span>
+<span class="nc" id="L35">        runLibrarySystem();</span>
+<span class="nc" id="L36">    }</span>
+
+    private static void addExampleData() {
+<span class="nc" id="L39">        Book book1 = new Book(&quot;1234567890&quot;, &quot;Odyssee, Homer&quot;);</span>
+<span class="nc" id="L40">        Book book2 = new Book(&quot;0987654321&quot;, &quot;Der Fremde, Albert Camus&quot;);</span>
+<span class="nc" id="L41">        books.add(book1);</span>
+<span class="nc" id="L42">        books.add(book2);</span>
+
+<span class="nc" id="L44">        Customer customer1 = new Customer(1, &quot;Thomas Müller&quot;);</span>
+<span class="nc" id="L45">        Customer customer2 = new Customer(2, &quot;Marco Reus&quot;);</span>
+<span class="nc" id="L46">        customers.add(customer1);</span>
+<span class="nc" id="L47">        customers.add(customer2);</span>
+
+<span class="nc" id="L49">        BookCopy copy1 = new BookCopy(1, book1);</span>
+<span class="nc" id="L50">        BookCopy copy2 = new BookCopy(2, book2);</span>
+<span class="nc" id="L51">        bookCopies.put(copy1.getId(), copy1);</span>
+<span class="nc" id="L52">        bookCopies.put(copy2.getId(), copy2);</span>
+<span class="nc" id="L53">    }</span>
+
+    private static void runLibrarySystem() {
+<span class="nc" id="L56">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L57">        displayWelcomeMessage();</span>
+
+<span class="nc" id="L59">        System.out.println(&quot;Möchten Sie die Bibliothek betreten? (ja/nein)&quot;);</span>
+<span class="nc" id="L60">        System.out.print(&quot;&gt; &quot;);</span>
+<span class="nc" id="L61">        String enterLibrary = scanner.nextLine();</span>
+
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (enterLibrary.equals(&quot;ja&quot;)) {</span>
+<span class="nc" id="L64">            VisitorActions visitorActions = new VisitorActions();</span>
+<span class="nc" id="L65">            visitorActions.performActions(scanner);</span>
+<span class="nc" id="L66">        } else {</span>
+<span class="nc" id="L67">            System.out.println(&quot;Vielen Dank und auf Wiedersehen!&quot;);</span>
+        }
+<span class="nc" id="L69">        scanner.close();</span>
+<span class="nc" id="L70">    }</span>
+
+    private static void displayWelcomeMessage() {
+<span class="nc" id="L73">        System.out.println(&quot;+--------------------------------------+&quot;);</span>
+<span class="nc" id="L74">        System.out.println(&quot;|          Willkommen zur              |&quot;);</span>
+<span class="nc" id="L75">        System.out.println(&quot;|           Bibliothek!                |&quot;);</span>
+<span class="nc" id="L76">        System.out.println(&quot;+--------------------------------------+&quot;);</span>
+<span class="nc" id="L77">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
