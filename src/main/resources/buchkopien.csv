@@ -1,0 +1,3 @@
+id,isbn,shelfLocation,addedToLibrary,lent,lentDate
+1,978-3-16-148410-0,Regal A,true,false,2024-01-9
+2,978-1-23-456789-0,Regal B,true,false,2023-05-12

@@ -1,77 +1,68 @@
-# Library Management System
+# Bibliothekssystem README
 
-A robust data management solution designed for libraries to manage book transactions and administrative processes effectively.
+## Einführung
+Das Bibliothekssystem ist eine Anwendung zur Verwaltung von Büchern, Buchkopien und Kunden in einer Bibliothek. Es ermöglicht Benutzern verschiedene Aktionen wie das Anzeigen von Büchern, das Verwalten von Buchkopien und das Ausleihen sowie Rückgeben von Buchkopien durchzuführen.
 
-## Overview
+## Klassenübersicht
 
-The Library Management System provides a comprehensive solution for managing library operations efficiently. From cataloging books to managing memberships and tracking borrowings, this system offers a centralized platform for librarians to handle their daily tasks.
+### Book
+Die **Book**-Klasse repräsentiert ein Buch mit detaillierten Informationen wie ISBN, Titel, Autoren, Veröffentlichungsjahr, Stadt, Verlag und Auflage.
 
-## Key Features
+#### Methoden
+- `loadBooksFromCSV()`: Lädt Bücher aus einer CSV-Datei, wobei das Format der CSV-Datei vorgegeben ist.
+- `displayBooks()`: Zeigt alle gespeicherten Bücher mit ihren Details in der Konsole an.
+- `deleteBook(String isbn)`: Löscht ein Buch anhand der ISBN.
+- `findBookByIsbn(String isbn)`: Sucht und liefert ein Buch anhand der ISBN zurück.
 
-1. **Display Books**: View the list of all books available in the library.
-2. **Delete Book**: Remove a book from the library by its ISBN.
-3. **Display Book Copies**: View the list of all book copies available in the library.
-4. **Delete Book Copy**: Remove a book copy from the library by its ID.
-5. **Display Customers**: View the list of all registered customers.
-6. **Delete Customer**: Remove a customer from the library by their ID.
+### BookCopy
+Die **BookCopy**-Klasse verwaltet einzelne Kopien eines Buches in der Bibliothek, einschließlich Informationen wie ID, ISBN, Regalplatz, Status (Hinzugefügt zur Bibliothek, Ausgeliehen) und Ausleihdatum
 
-## Getting Started
+#### Methoden
+- `loadBookCopiesFromCSV()`: Lädt Buchkopien aus einer CSV-Datei.
+- `displayBookCopies()`: Zeigt alle Buchkopien mit ihren Details in der Konsole an.
+- `displayLentBookCopies()`: Zeigt alle aktuell ausgeliehenen Buchkopien an.
+- `displayAvailableBookCopies()`: Zeigt alle verfügbaren Buchkopien an, die nicht ausgeliehen sind.
+- `deleteBookCopy(int id)`: Löscht eine Buchkopie anhand der ID.
+- `searchBookCopy(String query)`: Sucht Buchkopien anhand von Kriterien wie ISBN, Titel oder Autor.
+- `findBookCopyById(int id)`: Sucht eine Buchkopie anhand der ID.
+- Methoden zum Ausleihen (`lendBookCopy()`) und Zurückgeben (`returnBookCopy()`) von Buchkopien.
 
-### Installation
+### Customer
+Die **Customer**-Klasse repräsentiert die Bibliothekskunden mit Informationen wie ID, Name, Vorname, Adresse, PLZ, Stadt und Gebührenstatus.
 
-1. Clone the ZIP file to your local machine.
-2. Open the project in your preferred IDE.
-3. Build and run the application.
+#### Methoden
+- `loadCustomersFromCSV()`: Lädt Kundeninformationen aus einer CSV-Datei.
+- `displayCustomers()`: Zeigt alle Kunden mit ihren Details in der Konsole an.
+- `deleteCustomer(int id)`: Löscht einen Kunden anhand der ID.
+- `findCustomerById(int id)`: Sucht einen Kunden anhand der ID.
 
-### Usage
+### LibrarySystem
+Die **LibrarySystem**-Klasse stellt die Benutzeroberfläche für das Bibliothekssystem bereit. Benutzer führen über das Hauptmenü Funktionen wie das Anzeigen, Löschen, Suchen und Verwalten von Büchern, Buchkopien und Kunden aus.
 
-1. Run the `LibrarySystem` class to start the application.
-2. Choose to enter the library system or decline.
-3. Access the main dashboard to navigate through different modules such as book catalog, customer management, and book copy management.
-4. Perform various actions such as displaying books, deleting books, displaying customers, or more.
-5. To see the calculated test coverage via JaCoCo open the index.html file in the htmlReport folder. You can as well generate a new report in your IDE by choice.
+#### Methoden
+- `main(String[] args)`: Startet die Anwendung und das Menüsystem.
+- `loadExampleData()`: Lädt Beispieldaten für Bücher, Buchkopien und Kunden.
+- Methoden zur Anzeige von Büchern (`displayBooks()`), Buchkopien (`displayBookCopies()`), Kunden (`displayCustomers()`) sowie spezielle Methoden zur Suche und Verwaltung von Ausleihen und Rückgaben von Buchkopien.
+- Das System bietet umfangreiche Fehlerbehandlung und Eingabeverarbeitung, um eine reibungslose Interaktion zu gewährleisten.
 
-### Example Data
+## Ressourcen
+- Die Anwendung nutzt CSV-Dateien im Verzeichnis `src/main/resources`, um Daten für Bücher, Buchkopien und Kunden zu speichern und zu laden.
 
-Upon starting the application, some example data will be added to the system:
+## Autoren und Version
+Die Bibliothek wurde von Team 50 entwickelt.
 
-- Books:
-    - "Odyssee, Homer" with ISBN "1234567890"
-    - "Der Fremde, Albert Camus" with ISBN "0987654321"
+## .csv-Format
+**benutzer.csv**
+- id,name,firstName,address,zipCode,city,feesPayed
+- 1,Sachs,David,Urbanstraße4,70182,Stuttgart,ja
+- 2,Mustermann,Max,Teststraße1,12345,Berlin,nein
 
-- Customers:
-    - Thomas Müller with ID 1
-    - Marco Reus with ID 2
+**buchkopien.csv**
+- id,isbn,shelfLocation,addedToLibrary,lent,lentDate
+- 1,978-3-16-148410-0,Regal A,true,false,2024-01-9
+- 2,978-1-23-456789-0,Regal B,true,false,2023-05-12
 
-- Book Copies:
-    - Copy of "Odyssee, Homer" with ID 1
-    - Copy of "Der Fremde, Albert Camus" with ID 2
-
-## Testing
-
-- **BookTest**: Covers 100% of the methods and lines of code, ensuring the correct execution of the core functionality of deleting a book via ISBN and displaying books.
-- **BookCopyTest**: Covers 100% of the methods and lines of code, ensuring the correct execution of the core functionalities of deleting a book copy via ID and displaying all book copies.
-- **CustomerTest**: Covers 100% of the methods and lines of code, ensuring the correct execution of the core functionality of deleting a customer via ID and displaying customers.
-
-## Test Coverage with JaCoCo
-
-A test coverage report has already been created and is available to open through the index.html file in the folder htmlReport. 
-To be sure an updated test coverage has been calculated please generate a new report through your IDE.
-In IntelliJ you could do so by running the project with Coverage and generate a new report after doing so in the new coverage window.
-
-## Support
-
-For assistance or inquiries, please contact Team 50 in Software Engineering.
-
-## Authors
-
-Developed by Team 50, EST / EST-SS24 / project50.
-
-## Version History
-
-- 2.0.0: Current version with updated features and improved functionality.
-- 1.0.0: Initial release of the Library Management System.
-
-## License
-
-Usage is free for those permitted.
+**buecher.csv**
+- isbn,title,authors,year,city,publisher,edition
+- 978-3-16-148410-0,Troja,Dave,2024,Stuttgart,Beispielverlag,1. Auflage
+- 978-1-23-456789-0,Odyssee,Homer,2023,Berlin,Ein weiterer Verlag,2. Auflage

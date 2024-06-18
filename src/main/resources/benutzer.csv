@@ -1,0 +1,3 @@
+id,name,firstName,address,zipCode,city,feesPayed
+1,Sachs,David,Urbanstraße4,70182,Stuttgart,ja
+2,Mustermann,Max,Teststraße1,12345,Berlin,nein

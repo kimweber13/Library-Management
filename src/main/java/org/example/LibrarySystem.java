@@ -1,79 +1,198 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 /**
- * The implementation of the library.
- * Run this class in order to start the system.
+ * A class for running the library.
  *
  * @author Team 50
- * @version 2.0
+ * @version 3.0
  */
 
 public class LibrarySystem {
-    public static List<Book> books = new ArrayList<>();
-    private static List<Customer> customers = new ArrayList<>();
-    private static Map<Integer, BookCopy> bookCopies = new HashMap<>();
-
-    public static List<Book> getBooks() {
-        return books;
-    }
-
-    public static Map<Integer, BookCopy> getBookCopies() {
-        return bookCopies;
-    }
-
-    public static List<Customer> getCustomers() {
-        return customers;
-    }
-
     public static void main(String[] args) {
-        addExampleData();
-        runLibrarySystem();
-    }
-
-    private static void addExampleData() {
-        Book book1 = new Book("1234567890", "Odyssee, Homer");
-        Book book2 = new Book("0987654321", "Der Fremde, Albert Camus");
-        books.add(book1);
-        books.add(book2);
-
-        Customer customer1 = new Customer(1, "Thomas Müller");
-        Customer customer2 = new Customer(2, "Marco Reus");
-        customers.add(customer1);
-        customers.add(customer2);
-
-        BookCopy copy1 = new BookCopy(1, book1);
-        BookCopy copy2 = new BookCopy(2, book2);
-        bookCopies.put(copy1.getId(), copy1);
-        bookCopies.put(copy2.getId(), copy2);
-    }
-
-    private static void runLibrarySystem() {
         Scanner scanner = new Scanner(System.in);
-        displayWelcomeMessage();
+        boolean exit = false;
 
-        System.out.println("Möchten Sie die Bibliothek betreten? (ja/nein)");
-        System.out.print("> ");
-        String enterLibrary = scanner.nextLine();
+        loadExampleData();
 
-        if (enterLibrary.equals("ja")) {
-            VisitorActions visitorActions = new VisitorActions();
-            visitorActions.performActions(scanner);
-        } else {
-            System.out.println("Vielen Dank und auf Wiedersehen!");
+        while (!exit) {
+            System.out.println("\nBibliothekssystem Menü:");
+            System.out.println("1. Bücher anzeigen");
+            System.out.println("2. Buch löschen");
+            System.out.println("3. Buch suchen und anzeigen (nach ISBN)");
+            System.out.println("4. Alle Buchkopien anzeigen");
+            System.out.println("5. Buchkopie löschen");
+            System.out.println("6. Buchkopie suchen und anzeigen (nach ISBN, Titel oder Autor)");
+            System.out.println("7. Kunden anzeigen");
+            System.out.println("8. Kunden löschen");
+            System.out.println("9. Buchkopie ausleihen (nach Kunden-ID und Buchkopie-ID)");
+            System.out.println("10. Buchkopie zurückgeben (nach Kunden-ID und Buchkopie-ID)");
+            System.out.println("11. Alle ausgeliehenen Buchkopien anzeigen");
+            System.out.println("12. Alle nicht ausgeliehenen Buchkopien anzeigen");
+            System.out.println("0. Beenden");
+            System.out.print("Wählen Sie eine Option: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            switch (choice) {
+                case 1:
+                    Book.displayBooks();
+                    break;
+                case 2:
+                    System.out.print("Geben Sie die ISBN des zu löschenden Buches ein: ");
+                    String isbnToDelete = scanner.nextLine();
+                    Book.deleteBook(isbnToDelete);
+                    break;
+                case 3:
+                    System.out.print("Geben Sie die ISBN des gesuchten Buches ein: ");
+                    String isbnToSearch = scanner.nextLine();
+                    Book foundBook = Book.findBookByIsbn(isbnToSearch);
+                    if (foundBook != null) {
+                        displayBookDetails(foundBook);
+                    } else {
+                        System.out.println("Buch mit ISBN " + isbnToSearch + " wurde nicht gefunden.");
+                    }
+                    break;
+                case 4:
+                    BookCopy.displayBookCopies();
+                    break;
+                case 5:
+                    System.out.print("Geben Sie die ID der zu löschenden Buchkopie ein: ");
+                    int copyId = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
+                    BookCopy.deleteBookCopy(copyId);
+                    break;
+                case 6:
+                    searchBookCopyOption(scanner);
+                    break;
+                case 7:
+                    Customer.displayCustomers();
+                    break;
+                case 8:
+                    System.out.print("Geben Sie die ID des zu löschenden Kunden ein: ");
+                    int customerId = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
+                    Customer.deleteCustomer(customerId);
+                    break;
+                case 9:
+                    System.out.print("Geben Sie die Kunden-ID ein: ");
+                    int customerID = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
+                    System.out.print("Geben Sie die Buchkopie-ID ein: ");
+                    int bookCopyID = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
+                    lendBookCopy(customerID, bookCopyID, scanner);
+                    break;
+                case 10:
+                    System.out.print("Geben Sie die Kunden-ID ein: ");
+                    customerID = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
+                    System.out.print("Geben Sie die Buchkopie-ID ein: ");
+                    bookCopyID = scanner.nextInt();
+                    scanner.nextLine(); // consume newline
+                    returnBookCopy(customerID, bookCopyID);
+                    break;
+                case 11:
+                    displayBorrowedBookCopies();
+                    break;
+                case 12:
+                    displayAvailableBookCopies();
+                    break;
+                case 0:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Ungültige Option. Bitte wählen Sie erneut.");
+                    break;
+            }
         }
+
         scanner.close();
     }
 
-    private static void displayWelcomeMessage() {
-        System.out.println("+--------------------------------------+");
-        System.out.println("|          Willkommen zur              |");
-        System.out.println("|           Bibliothek!                |");
-        System.out.println("+--------------------------------------+");
+    public static void loadExampleData() {
+        Book.loadBooksFromCSV();
+        BookCopy.loadBookCopiesFromCSV();
+        Customer.loadCustomersFromCSV();
+    }
+
+    private static void displayBookDetails(Book book) {
+        System.out.println("Buchdetails:");
+        System.out.println("ISBN: " + book.getIsbn());
+        System.out.println("Titel: " + book.getTitle());
+        System.out.println("Autoren: " + book.getAuthors());
+        System.out.println("Jahr: " + book.getYear());
+        System.out.println("Stadt: " + book.getCity());
+        System.out.println("Verlag: " + book.getPublisher());
+        System.out.println("Auflage: " + book.getEdition());
+    }
+
+    private static void searchBookCopyOption(Scanner scanner) {
+        System.out.print("Geben Sie die ISBN, den Titel oder den Autor der gesuchten Buchkopie ein: ");
+        String query = scanner.nextLine();
+        List<BookCopy> results = BookCopy.searchBookCopy(query);
+        if (!results.isEmpty()) {
+            System.out.println("Gefundene Buchkopien:");
+            for (BookCopy copy : results) {
+                System.out.println("ID: " + copy.getId() + ", ISBN: " + copy.getIsbn() + ", Regal: " + copy.getShelfLocation() +
+                        ", Hinzugefügt zur Bibliothek: " + (copy.isAddedToLibrary() ? "Ja" : "Nein") +
+                        ", Ausgeliehen: " + (copy.isLent() ? "Ja" : "Nein") +
+                        ", Ausleihdatum: " + copy.getLentDate() +
+                        ", Titel: " + copy.getBook().getTitle() + ", Autoren: " + copy.getBook().getAuthors());
+            }
+        } else {
+            System.out.println("Keine Buchkopien gefunden, die auf die Suchanfrage passen.");
+        }
+    }
+
+    private static void lendBookCopy(int customerId, int bookCopyId, Scanner scanner) {
+        Customer customer = Customer.findCustomerById(customerId);
+        BookCopy bookCopy = BookCopy.findBookCopyById(bookCopyId);
+        if (customer != null && bookCopy != null && !bookCopy.isLent()) {
+            System.out.print("Geben Sie das Ausleihdatum ein (YYYY-MM-DD): ");
+            String lentDate = scanner.nextLine();
+            bookCopy.lendBookCopy(customerId, lentDate);
+        } else {
+            System.out.println("Kunde oder Buchkopie nicht gefunden, oder Buchkopie bereits ausgeliehen.");
+        }
+    }
+
+    private static void returnBookCopy(int customerId, int bookCopyId) {
+        Customer customer = Customer.findCustomerById(customerId);
+        BookCopy bookCopy = BookCopy.findBookCopyById(bookCopyId);
+        if (customer != null && bookCopy != null && bookCopy.isLent()) {
+            bookCopy.returnBookCopy();
+        } else {
+            System.out.println("Kunde oder Buchkopie nicht gefunden, oder Buchkopie war nicht ausgeliehen.");
+        }
+    }
+
+    private static void displayBorrowedBookCopies() {
+        System.out.println("Alle ausgeliehenen Buchkopien:");
+        for (BookCopy copy : BookCopy.bookCopies) {
+            if (copy.isLent()) {
+                System.out.println("ID: " + copy.getId() + ", ISBN: " + copy.getIsbn() + ", Regal: " + copy.getShelfLocation() +
+                        ", Hinzugefügt zur Bibliothek: " + (copy.isAddedToLibrary() ? "Ja" : "Nein") +
+                        ", Ausgeliehen: " + (copy.isLent() ? "Ja" : "Nein") +
+                        ", Ausleihdatum: " + copy.getLentDate() +
+                        ", Titel: " + copy.getBook().getTitle() + ", Autoren: " + copy.getBook().getAuthors());
+            }
+        }
+    }
+
+    private static void displayAvailableBookCopies() {
+        System.out.println("Alle nicht ausgeliehenen Buchkopien:");
+        for (BookCopy copy : BookCopy.bookCopies) {
+            if (!copy.isLent()) {
+                System.out.println("ID: " + copy.getId() + ", ISBN: " + copy.getIsbn() + ", Regal: " + copy.getShelfLocation() +
+                        ", Hinzugefügt zur Bibliothek: " + (copy.isAddedToLibrary() ? "Ja" : "Nein") +
+                        ", Ausgeliehen: " + (copy.isLent() ? "Ja" : "Nein") +
+                        ", Ausleihdatum: " + copy.getLentDate() +
+                        ", Titel: " + copy.getBook().getTitle() + ", Autoren: " + copy.getBook().getAuthors());
+            }
+        }
     }
 }
