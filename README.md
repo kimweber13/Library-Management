@@ -69,6 +69,7 @@ Developed by Team 50, EST / EST-SS24 / project50.
 
 ## Version History
 
+- 3.0.0: pushed by david
 - 2.0.0: Current version with updated features and improved functionality.
 - 1.0.0: Initial release of the Library Management System.
 
