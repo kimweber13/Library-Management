@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Run this class in order to start the system.
  *
  * @author Team 50
- * @version 2.0
+ * @version 3.0
  */
 
 public class LibrarySystem {

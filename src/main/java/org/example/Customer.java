@@ -4,7 +4,7 @@ package org.example;
  * A class to specify a customer.
  *
  * @author Team 50
- * @version 2.0
+ * @version 3.0
  */
 
 public class Customer {

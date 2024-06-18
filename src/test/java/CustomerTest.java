@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * A class to test a customers features.
  *
  * @author Team 50
- * @version 2.0
+ * @version 3.0
  */
 
 public class CustomerTest {

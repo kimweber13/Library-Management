@@ -6,7 +6,7 @@ import java.util.Scanner;
  * The visitors possible actions.
  *
  * @author Team 50
- * @version 2.0
+ * @version 3.0
  */
 
 public class VisitorActions {

@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * A class to test a books features.
  *
  * @author Team 50
- * @version 2.0
+ * @version 3.0
  */
 
 public class BookTest {
