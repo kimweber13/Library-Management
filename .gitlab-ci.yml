@@ -1,7 +1,7 @@
 stages:
-    - build
-    - test
-    - deploy
+  - build
+  - test
+  - deploy
 
 build-job:
   stage: build
@@ -11,7 +11,7 @@ build-job:
     - echo "Hello, $GITLAB_USER_LOGIN!"
   artifacts:
     paths:
-        - target/
+      - target/
 
 
 completeTest:
@@ -26,7 +26,7 @@ completeTest:
     - sleep 20
   artifacts:
     paths:
-        - target/testArtifact
+      - target/testArtifact
 
 checkstyle:
   stage: test

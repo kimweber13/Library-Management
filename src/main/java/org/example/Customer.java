@@ -56,7 +56,7 @@ public class Customer {
         return city;
     }
 
-    public boolean hasFeesPayed() {
+    public boolean isFeesPayed() {
         return feesPayed;
     }
 
@@ -67,7 +67,7 @@ public class Customer {
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             String line;
-            boolean firstLine = true; // Skip header
+            boolean firstLine = true;
             while ((line = br.readLine()) != null) {
                 if (firstLine) {
                     firstLine = false;
@@ -95,17 +95,25 @@ public class Customer {
     }
 
     public static void displayCustomers() {
-        System.out.println("");
         System.out.println("Alle Kunden:");
         for (Customer customer : customers) {
-            System.out.println(customer.getId() + " - " + customer.getName() + " " + customer.getFirstName() +
-                    ", " + customer.getAddress() + ", " + customer.getZipCode() + " " + customer.getCity() +
-                    ", Gebühren bezahlt: " + (customer.hasFeesPayed() ? "Ja" : "Nein"));
+            System.out.println("ID: " + customer.getId() + ", Name: " + customer.getName() + ", Vorname: " + customer.getFirstName() +
+                    ", Adresse: " + customer.getAddress() + ", PLZ: " + customer.getZipCode() + ", Stadt: " + customer.getCity() +
+                    ", Gebühren bezahlt: " + (customer.isFeesPayed() ? "Ja" : "Nein"));
         }
     }
 
     public static void deleteCustomer(int id) {
         customers.removeIf(customer -> customer.getId() == id);
         System.out.println("Kunde mit ID " + id + " wurde gelöscht.");
+    }
+
+    public static Customer findCustomerById(int id) {
+        for (Customer customer : customers) {
+            if (customer.getId() == id) {
+                return customer;
+            }
+        }
+        return null;
     }
 }
