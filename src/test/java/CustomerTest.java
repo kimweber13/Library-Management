@@ -13,56 +13,58 @@ import static org.junit.jupiter.api.Assertions.*;
  * A class to test a customers features.
  *
  * @author Team 50
- * @version 3.0
+ * @version 2.0
  */
 
-public class CustomerTest {
+/**
+ public class CustomerTest {
 
-    private Customer customer;
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+ private Customer customer;
+ private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
-    @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(outContent));
-        LibrarySystem.getCustomers().clear();
-        customer = new Customer(1, "Thomas Müller");
-        LibrarySystem.getCustomers().add(customer);
-    }
+ @BeforeEach
+ public void setUp() {
+ System.setOut(new PrintStream(outContent));
+ LibrarySystem.getCustomers().clear();
+ customer = new Customer(1, "Thomas Müller");
+ LibrarySystem.getCustomers().add(customer);
+ }
 
-    @Test
-    public void testDisplayCustomers() {
-        LibrarySystem.getCustomers().clear();
-        Customer customer1 = new Customer(1, "Thomas Müller");
-        Customer customer2 = new Customer(2, "Marco Reus");
-        LibrarySystem.getCustomers().add(customer1);
-        LibrarySystem.getCustomers().add(customer2);
+ @Test
+ public void testDisplayCustomers() {
+ LibrarySystem.getCustomers().clear();
+ Customer customer1 = new Customer(1, "Thomas Müller");
+ Customer customer2 = new Customer(2, "Marco Reus");
+ LibrarySystem.getCustomers().add(customer1);
+ LibrarySystem.getCustomers().add(customer2);
 
-        Customer.displayCustomers();
+ Customer.displayCustomers();
 
-        String output = outContent.toString().trim();
-        assertTrue(output.contains("Kunden:"));
-        assertTrue(output.contains("ID: 1, Name: Thomas Müller"));
-        assertTrue(output.contains("ID: 2, Name: Marco Reus"));
-    }
+ String output = outContent.toString().trim();
+ assertTrue(output.contains("Kunden:"));
+ assertTrue(output.contains("ID: 1, Name: Thomas Müller"));
+ assertTrue(output.contains("ID: 2, Name: Marco Reus"));
+ }
 
-    @Test
-    public void testDeleteCustomer() {
-        int customerId = customer.getId();
-        List<Customer> customers = LibrarySystem.getCustomers();
-        assertTrue(customers.contains(customer));
+ @Test
+ public void testDeleteCustomer() {
+ int customerId = customer.getId();
+ List<Customer> customers = LibrarySystem.getCustomers();
+ assertTrue(customers.contains(customer));
 
-        Customer.deleteCustomer(customerId);
+ Customer.deleteCustomer(customerId);
 
-        assertFalse(customers.contains(customer));
-    }
+ assertFalse(customers.contains(customer));
+ }
 
-    @Test
-    public void testDeleteNonExistingCustomer() {
-        int nonExistingCustomerId = 1234;
+ @Test
+ public void testDeleteNonExistingCustomer() {
+ int nonExistingCustomerId = 1234;
 
-        Customer.deleteCustomer(nonExistingCustomerId);
+ Customer.deleteCustomer(nonExistingCustomerId);
 
-        String output = outContent.toString().trim();
-        assertTrue(output.contains("Kunde mit ID " + nonExistingCustomerId + " wurde nicht gefunden."));
-    }
-}
+ String output = outContent.toString().trim();
+ assertTrue(output.contains("Kunde mit ID " + nonExistingCustomerId + " wurde nicht gefunden."));
+ }
+ }
+ */

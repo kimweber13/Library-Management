@@ -1,5 +1,3 @@
-+---------------------------------------------------------------------+
-        id,name,firstName,address,zipCode,city,feesPayed
-+---------------------------------------------------------------------+
-1,Smith,Bob,Musterstraße 42,12345,Stuttgart,yes
-2,Miller,Alice,Universitätsweg 1,54321,Musterstadt,no
+id,name,firstName,address,zipCode,city,feesPayed
+1,Sachs,David,Urbanstraße4,70182,Stuttgart,ja
+2,Mustermann,Max,Teststraße1,12345,Berlin,nein

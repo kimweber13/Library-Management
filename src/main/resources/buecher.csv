@@ -1,7 +1,3 @@
-+---------------------------------------------------------------------+
-           isbn,title,authors,year,city,publisher,edition
-+---------------------------------------------------------------------+
-
-3551551677,Harry Potter und der Stein der Weisen,Joanne K. Rowling,1998,Hamburg,Carlsen Verlag GmbH,1
-3608987010,Der Herr der Ringe: Band 1-3, J.R.R. Tolkien,2022,Stuttgart,Klett-Cotta,1
-3036959548,Per Anhalter durch die Galaxis: Band 1 der fünfbändigen Intergalaktischen Trilogie,Douglas Adams,2017,Zürich,Kein & Aber,1
+isbn,title,authors,year,city,publisher,edition
+978-3-16-148410-0,Troja,Dave,2024,Stuttgart,Beispielverlag,1. Auflage
+978-1-23-456789-0,Odyssee,Homer,2023,Berlin,Ein weiterer Verlag,2. Auflage

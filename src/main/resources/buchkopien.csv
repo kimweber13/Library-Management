@@ -1,5 +1,3 @@
-+---------------------------------------------------------------------+
-        isbn,bookIsbn,shelfLocation,addedToLibrary,lent,lentDate
-+---------------------------------------------------------------------+
-1,3036959548,SF42,2022-05-29,no,
-2,3036959548,SF42,2022-05-29,yes,2024-01-31
+id,isbn,shelfLocation,addedToLibrary,lent,lentDate
+1,978-3-16-148410-0,Regal A,true,false,2024-01-9
+2,978-1-23-456789-0,Regal B,false,false,2023-05-12
