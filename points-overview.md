@@ -8,7 +8,7 @@
 | ----------------------- |------------------------------------|
 | 01: Spezifikation       | 25 / 25                            |
 | 02: Testfall-Erstellung | 25 / 25                            |
-| 03: Implementierung     | 40  / 40                           |
+| 03: Implementierung     | / 40                               |
 | 04: Wartung & Evolution | / 25                               |
 | 05: Qualitätssicherung  | / 25                               |
-| **Summe**:              | 90 / 140                           |
+| **Summe**:              | 50 / 140                           |
