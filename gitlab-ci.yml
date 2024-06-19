@@ -1,0 +1,19 @@
+image: maven:4.0.0-openjdk-17
+
+stages:
+  - build
+  - test
+
+cache:
+  paths:
+    - .m2/repository
+
+build:
+  stage: build
+  script:
+    - mvn clean compile
+
+test:
+  stage: test
+  script:
+    - mvn test
