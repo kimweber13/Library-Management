@@ -9,8 +9,7 @@
 | 01: Spezifikation       | 25 / 25                            |
 | 02: Testfall-Erstellung | 25 / 25                            |
 | 03: Implementierung     | 24 / 50                               |
-| 04: Wartung & Evolution | / 25                               |
+| 04: Wartung & Evolution | 0 / 25                               |
 | 05: Qualitätssicherung  | / 25                               |
 | **Summe**:              | 74 / 140                           |
 
-Die commit messages sind gar nicht aussagekräftig!!!!
